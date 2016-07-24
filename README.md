@@ -13,3 +13,9 @@ from `include/my_model.h` to access and use the embedded Python code.
 
 
 `build.sh` gives steps to build and run demos.
+
+
+## Todo
+
+* Use make
+* Test on windows

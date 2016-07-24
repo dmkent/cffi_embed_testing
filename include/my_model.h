@@ -1,4 +1,4 @@
-extern void * create_model();
+extern void * create_model(const char* classname);
 
 extern void destroy_model(void* model);
     

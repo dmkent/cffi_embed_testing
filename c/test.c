@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[]){
     /* create model */
-    void * model_handle = create_model();
+    void * model_handle = create_model("mypackage.python_class.MyModel");
 
     /* find out the varible names */
     int i, nvars = 0;

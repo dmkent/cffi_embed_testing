@@ -12,7 +12,13 @@ class MyModel
     public:
     MyModel()
     {
-        _model = create_model();
+        std::string model_name("mypackage.python_class.MyModel");
+        _model = create_model(model_name.c_str());
+    }
+
+    MyModel(std::string model_name)
+    {
+        _model = create_model(model_name.c_str());
     }
 
     ~MyModel()
@@ -65,6 +71,31 @@ int main(int argc, char* argv[]){
     /* print current state */
     std::cout << "a: " << model->GetVariable("state_a") << "\n";
     std::cout << "b: " << model->GetVariable("state_b") << "\n";
+
+    delete model;
+    
+    model = new MyModel("mypackage.model2.MyBetterModel");
+
+    /* find out the varible names */
+    varnames = model->GetVariableNames();
+    for(auto const &vname: varnames){
+        std::cout << "  " << vname << "\n";
+    }
+    /* set some values */
+    model->SetVariable("param1", 2.0);
+
+    /* print current state */
+    std::cout << "a: " << model->GetVariable("state_a") << "\n";
+    std::cout << "b: " << model->GetVariable("state_b") << "\n";
+    std::cout << "other: " << model->GetVariable("other_var") << "\n";
+
+    /* move forward one step */
+    model->RunStep();
+
+    /* print current state */
+    std::cout << "a: " << model->GetVariable("state_a") << "\n";
+    std::cout << "b: " << model->GetVariable("state_b") << "\n";
+    std::cout << "other: " << model->GetVariable("other_var") << "\n";
 
     delete model;
 }
