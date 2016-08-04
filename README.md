@@ -11,11 +11,22 @@ The main embedding CFFI code is then in `_build.py`. This builds a
 There are C and C++ command line programs that then use the exported interface 
 from `include/my_model.h` to access and use the embedded Python code.
 
+## Using
 
-`build.sh` gives steps to build and run demos.
+To build and run this try:
 
+```bash
+export PATH=~/miniconda3/bin:$PATH
+conda env create -f cffi_env.yaml
+source activate cffi
+
+mkdir cmakebuild
+cd cmakebuild/
+cmake -DCMAKE_INSTALL_PREFIX=install .. && make install
+PYTHONPATH=../lib LD_LIBRARY_PATH=install/lib ./install/bin/test
+PYTHONPATH=../lib LD_LIBRARY_PATH=install/lib ./install/bin/testcpp
+```
 
 ## Todo
 
-* Use make
 * Test on windows
